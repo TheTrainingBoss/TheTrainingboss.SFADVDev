@@ -19,7 +19,7 @@
 				<h3>
 					<a @Html.InlineEditingFieldAttributes("Title", "ShortText") href="@navigateUrl">@item.Fields.Title</a>
 				</h3>
-                
+                <div>Hello World</div>
                 <div>
 				    <span class="text-muted">
 					    @item.GetDateTime("PublicationDate", "MMM d, yyyy, HH:mm tt")
@@ -28,10 +28,11 @@
 				    </span>
                     @Html.CommentsCount((string)navigateUrl, item.DataItem)
                 </div>
+                <div>Region: @item.Fields.Region</div>
 
 				<div @Html.InlineEditingFieldAttributes("Summary", "ShortText")>@Html.HtmlSanitize((string)item.Fields.Summary)</div>
 
-				<a href="@navigateUrl">@Html.Resource("FullStory")</a>
+				<a href="@navigateUrl">@Html.Raw("Read More...")</a>
 			</li>
         }
     </ul>
