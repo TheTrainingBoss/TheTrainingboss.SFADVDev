@@ -973,6 +973,7 @@
     <Content Include="AdminApp\styles.5d98cadcb9c5a6cd249d.css" />
     <Content Include="AdminApp\vendor.a787cfdb273769cadfb5.js" />
     <Content Include="AdminApp\vendor.a787cfdb273769cadfb5.js.LICENSE.txt" />
+    <Content Include="App_Data\appStatusReport.html" />
     <Content Include="App_Data\GeoLocation\citieslist.txt" />
     <Content Include="App_Data\RadCaptcha\0.wav" />
     <Content Include="App_Data\RadCaptcha\1.wav" />
@@ -1010,6 +1011,12 @@
     <Content Include="App_Data\RadCaptcha\X.wav" />
     <Content Include="App_Data\RadCaptcha\Y.wav" />
     <Content Include="App_Data\RadCaptcha\Z.wav" />
+    <Content Include="App_Data\Sitefinity.mdf" />
+    <Content Include="App_Data\Sitefinity\TrackingConsent\consentDialog.html" />
+    <Content Include="App_Data\Sitefinity_log.ldf">
+      <DependentUpon>Sitefinity.mdf</DependentUpon>
+    </Content>
+    <Content Include="Css\Raja.css" />
     <Content Include="Default.aspx" />
     <Content Include="extensions.bundle.js" />
     <Content Include="Mvc\Controllers\readme.txt" />
@@ -1186,6 +1193,17 @@
     <Content Include="App_Data\RadSpell\de-DE.tdf" />
     <Content Include="App_Data\GeoLocation\GeoLite2-City.mmdb" />
     <Content Include="Mvc\Views\MyWidget\Index.cshtml" />
+    <Content Include="App_Data\Sitefinity\Configuration\DataConfig.config" />
+    <Content Include="App_Data\Sitefinity\Configuration\LibrariesConfig.config" />
+    <Content Include="App_Data\Sitefinity\Configuration\PagesConfig.config" />
+    <Content Include="App_Data\Sitefinity\Configuration\SecurityConfig.config" />
+    <Content Include="App_Data\Sitefinity\Configuration\WebSecurityConfig.config" />
+    <Content Include="App_Data\Sitefinity\Logs\0353f3e4-8473-4e2e-985f-277c4d221ea2Trace.log" />
+    <Content Include="App_Data\Sitefinity\Logs\Error.log" />
+    <Content Include="App_Data\Sitefinity\Logs\Trace.log" />
+    <Content Include="App_Data\Sitefinity\Logs\UpgradeTrace.log" />
+    <Content Include="App_Data\Sitefinity\Sitefinity.lic" />
+    <None Include="Mvc\Views\News\List.LinoList.cshtml" />
     <None Include="packages.config" />
     <Content Include="SampleTemplate.cshtml">
       <Generator>RazorGenerator</Generator>
@@ -1502,7 +1520,10 @@
     <Analyzer Include="packages\AWSSDK.S3.3.5.3.12\analyzers\dotnet\cs\AWSSDK.S3.CodeAnalysis.dll" />
     <Analyzer Include="packages\AWSSDK.SQS.3.5.0.36\analyzers\dotnet\cs\AWSSDK.SQS.CodeAnalysis.dll" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\Sitefinity\Temp\Libraries\" />
+    <Folder Include="App_Data\Storage\FileSystem\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
