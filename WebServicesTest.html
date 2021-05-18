@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Title</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <h1>JS-based resource owner sample</h1>
+    <div>
+        <label>username</label>
+        <input id="username" value="lino@foo.com" />
+    </div>
+    <div>
+        <label>password</label>
+        <input id="password" type="password" value="admin1234" />
+    </div>
+    <div>
+        <button id="getTokenBtn">Get Token with Credentials</button>
+        <button id="getTokenWithRefreshBtn">Get Token with Refresh Token</button>
+        <button id="apiCallBtn">Api Call</button>
+    </div>
+    <div>  Token: <label id="token"></label></div>
+    <br />
+    <div>Refresh Token:<label id="refreshToken"></label></div>
+    <br />
+    <div>Api Result:<p id="apiResult"></p></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script>
+        //The token end point from where we can retrieve the access token
+        var tokenEndPoint = "http://localhost:62500/Sitefinity/Authenticate/OpenID/connect/token";
+        var apiUrl="http://localhost:62500/api/default/newsitems";
+
+        var client_id = "LinoApp";
+        var client_secret = "linosecret";
+
+        var accessToken;
+        var refreshToken;
+
+       $("#getTokenBtn").on("click", getToken);
+       $("#getTokenWithRefreshBtn").on("click", getAccessTokenFromRefreshToken);
+       $("#apiCallBtn").on("click", callApi);
+       function getToken() {
+            var username = $('#username').val();
+            var password = $('#password').val();
+           //Call that gets the access and refresh token
+            $.ajax({
+                url:tokenEndPoint,
+                data:{
+                  username:username,
+                  password:password,
+                  grant_type:'password',
+                  scope:'openid offline_access',
+                  client_id:client_id,
+                  client_secret:client_secret
+                },
+                method:'POST',
+                success:function(data){
+                    console.log(data.access_token);
+                    console.log(data.refresh_token);
+                    $('#token').text(data.access_token);
+                    $('#refreshToken').text(data.refresh_token);
+                    accessToken=data.access_token;
+                    refreshToken=data.refresh_token;
+                },
+                error:function(err){
+                    alert(err.responseText);
+                }
+            })
+         }
+        //Call that gets new access and refresh token from the current refresh token
+        function getAccessTokenFromRefreshToken() {
+            $.ajax({
+                url:tokenEndPoint,
+                data:{
+                  refresh_token:refreshToken,
+                  grant_type: 'refresh_token',
+                  client_id:client_id,
+                  client_secret:client_secret
+                },
+                method:'POST',
+                success:function(data){
+                    console.log(data.access_token);
+                    console.log(data.refresh_token);
+                    $('#token').text(data.access_token);
+                    $('#refreshToken').text(data.refresh_token);
+                    accessToken=data.access_token;
+                    refreshToken=data.refresh_token;
+                },
+                error:function(err){
+                    alert(err.responseText);
+                }
+            })
+        }
+        //Sitefinity Web API call with access token as a bearer token
+         function callApi() {
+            $.ajax({
+                url:apiUrl,
+                method:'GET',
+                beforeSend:function (xhr) {
+                    xhr.setRequestHeader ("Authorization", "Bearer " + accessToken);
+                },
+                success:function(data){
+                    if(data.value.length!==0){
+                    $("#apiResult").text("Item content:"+ data.value[0].Content)
+                    }
+                    else{
+                         $("#apiResult").text("No news items");
+                    }
+                },
+                error:function(err){
+                    alert(err.responseText);
+                }
+            })
+        }
+    </script>
+</body>
+</html>

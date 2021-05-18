@@ -18,6 +18,7 @@ using System.Text.RegularExpressions;
 using Telerik.Sitefinity.Security.Claims;
 using System.Collections.Generic;
 using Telerik.Sitefinity.Workflow;
+using Telerik.Sitefinity;
 
 namespace TheTrainingboss.SFADVDev.Mvc.Controllers
 {
@@ -64,6 +65,30 @@ namespace TheTrainingboss.SFADVDev.Mvc.Controllers
 			return View();
         }
 
+		public ActionResult FluentPage()
+        {
+			var guid = Guid.NewGuid();
+			App.WorkWith().Page().CreateNewStandardPage(SiteInitializer.CurrentFrontendRootNodeId, guid)
+				.Do(p =>
+				{
+					p.Title = "The Training Boss Page From Fluent API";
+					p.Name = "TrainingBossPageFromFluentAPI";
+					p.Description = "This is a Trainig Page (Fluent) Description";
+					p.ShowInNavigation = true;
+					p.DateCreated = DateTime.Now;
+					p.LastModified = DateTime.Now;
+					p.Owner = ClaimsManager.GetCurrentUserId();
+					p.GetPageData().HtmlTitle = "Training Boss Page (Fluent) HTML Title";
+					p.GetPageData().Description = "Training Boss Page (Fluent) HTML Description";
+					p.GetPageData().NavigationNode.Title = "Training Boss Page (Fluent) Navigation Title";
+				}).SaveChanges();
+
+			var bag = new Dictionary<string, string>();
+			bag.Add("ContentType", typeof(PageNode).FullName);
+			WorkflowManager.MessageWorkflow(guid, typeof(PageNode), null, "Publish", false, bag);
+
+			return View();
+        }
 			
         protected override void HandleUnknownAction(string actionName)
         {

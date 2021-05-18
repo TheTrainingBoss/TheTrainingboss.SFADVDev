@@ -11,23 +11,96 @@ using Telerik.Sitefinity.Personalization;
 using Telerik.Sitefinity.Modules.News;
 using System.Linq;
 using Telerik.Sitefinity.GenericContent.Model;
+using Telerik.Sitefinity.News.Model;
+using System;
+using System.Text.RegularExpressions;
+using System.Collections.Generic;
+using Telerik.Sitefinity.Workflow;
+using Telerik.Sitefinity.Model;
+using Telerik.Sitefinity.Taxonomies;
+using Telerik.Sitefinity.Taxonomies.Model;
+using Telerik.OpenAccess;
 
 namespace TheTrainingboss.SFADVDev.Mvc.Controllers
 {
 	[ControllerToolboxItem(Name = "NewsCrud", Title = "News Crud", SectionName = "SFADVDev")]
 	public class NewsCrudController : Controller, IPersonalizable
 	{
+		NewsManager nm = NewsManager.GetManager();
 		// GET: NewsCrud
 		public ActionResult Index()
 		{
-			NewsManager nm = NewsManager.GetManager();
-			var news = nm.GetNewsItems().Where(n => n.Status == ContentLifecycleStatus.Live);
-			var model = new NewsCrudModel(news);
 			
+			var news = nm.GetNewsItems().Where(n => n.Status == ContentLifecycleStatus.Live);
+			var model = new NewsCrudModel(news);		
 			return View(model);
 		}
-		
-        protected override void HandleUnknownAction(string actionName)
+
+		public ActionResult CreatePressRelease()
+		{
+			NewsItem item = nm.CreateNewsItem();
+			item.Title = "News Item 1";
+			item.Content = "<h2>Test content here</h2>";
+			item.DateCreated = DateTime.UtcNow;
+			item.PublicationDate = DateTime.UtcNow;
+			item.LastModified = DateTime.UtcNow;
+			item.UrlName = Regex.Replace(item.Title, @"[^\w\-\!\$\'\(\)\=\@\d_]+", "-");
+
+			nm.SaveChanges();
+
+			var bag = new Dictionary<string, string>();
+			bag.Add("ContentType", typeof(NewsItem).FullName);
+			WorkflowManager.MessageWorkflow(item.Id, typeof(NewsItem), null, "Publish", false, bag);
+
+			return View();
+		}
+
+		public ActionResult Update()
+        {
+			var master = nm.GetNewsItems().FirstOrDefault(n => n.Title.Equals("News Item 1") && n.Status == ContentLifecycleStatus.Master);
+
+			var temp = nm.Lifecycle.CheckOut(master) as NewsItem;
+			temp.Content = "<div> Hello </div>";
+			if (temp.DoesFieldExist("Region"))
+			{
+				temp.SetValue("Region", "Europe");
+			}
+
+			TaxonomyManager tm = TaxonomyManager.GetManager();
+
+			var category = tm.GetTaxa<HierarchicalTaxon>()
+				   .FirstOrDefault(t => t.Name == "Press");
+			if (category != null)
+			{
+				var list = temp.GetValue<TrackedList<Guid>>("Category");
+				list.Add(category.Id);
+
+				temp.SetValue("Category", list);
+			}
+
+			var tag = tm.GetTaxa<FlatTaxon>()
+				   .FirstOrDefault(t => t.Name == "news");
+
+			if (tag != null)
+			{
+				var list = temp.GetValue<TrackedList<Guid>>("Tags");
+				list.Add(tag.Id);
+				temp.SetValue("Tags", list);
+			}
+
+
+			master = nm.Lifecycle.CheckIn(temp) as NewsItem;
+			
+			nm.SaveChanges();
+
+			var bag = new Dictionary<string, string>();
+			bag.Add("ContentType", typeof(NewsItem).FullName);
+			WorkflowManager.MessageWorkflow(master.Id, typeof(NewsItem), null, "Publish", false, bag);
+
+			return View();
+        }
+
+		protected override void HandleUnknownAction(string actionName)
         {
             this.ActionInvoker.InvokeAction(this.ControllerContext, "Index");
         }

@@ -1166,6 +1166,7 @@
     <Content Include="Sitefinity\Services\Workflow\WorkflowDefinitionService.svc" />
     <Content Include="Sitefinity\Services\Workflow\WorkflowService.svc" />
     <Content Include="Web.config" />
+    <Content Include="WebServicesTest.html" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RazorGeneratorMvcStart.cs" />
@@ -1208,10 +1209,13 @@
     <Content Include="App_Data\Sitefinity\Logs\UpgradeTrace.log" />
     <Content Include="App_Data\Sitefinity\Sitefinity.lic" />
     <Content Include="Mvc\Views\NewsCrud\Index.cshtml" />
+    <Content Include="Mvc\Views\NewsCrud\CreatePressRelease.cshtml" />
+    <Content Include="Mvc\Views\NewsCrud\Update.cshtml" />
     <None Include="Mvc\Views\News\List.LinoList.cshtml" />
     <Content Include="Mvc\Views\PageCrud\Index.cshtml" />
     <Content Include="Mvc\Views\PageCrud\CreatePage.cshtml" />
     <Content Include="Mvc\Views\Shared\_lino.cshtml" />
+    <Content Include="Mvc\Views\PageCrud\FluentPage.cshtml" />
     <None Include="packages.config" />
     <Content Include="SampleTemplate.cshtml">
       <Generator>RazorGenerator</Generator>
