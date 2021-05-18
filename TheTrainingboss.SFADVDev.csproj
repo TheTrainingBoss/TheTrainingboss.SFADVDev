@@ -1019,6 +1019,7 @@
     <Content Include="Css\Raja.css" />
     <Content Include="Default.aspx" />
     <Content Include="extensions.bundle.js" />
+    <Content Include="Global.asax" />
     <Content Include="Mvc\Controllers\readme.txt" />
     <Content Include="Mvc\Models\readme.txt" />
     <Content Include="Mvc\Views\readme.txt" />
@@ -1171,12 +1172,18 @@
   <ItemGroup>
     <Compile Include="App_Start\RazorGeneratorMvcStart.cs" />
     <Compile Include="AzureWebRole.cs" />
+    <Compile Include="Configuration\AnnabelleConfig.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="Mvc\Controllers\MyWidgetController.cs" />
     <Compile Include="Mvc\Controllers\NewsCrudController.cs" />
     <Compile Include="Mvc\Controllers\PageCrudController.cs" />
+    <Compile Include="Mvc\Models\IRajaEvent.cs" />
     <Compile Include="Mvc\Models\MyWidgetModel.cs" />
     <Compile Include="Mvc\Models\NewsCrudModel.cs" />
     <Compile Include="Mvc\Models\PageCrudModel.cs" />
+    <Compile Include="Mvc\Models\RajaEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

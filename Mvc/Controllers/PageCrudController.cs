@@ -19,6 +19,7 @@ using Telerik.Sitefinity.Security.Claims;
 using System.Collections.Generic;
 using Telerik.Sitefinity.Workflow;
 using Telerik.Sitefinity;
+using Telerik.Sitefinity.Services;
 
 namespace TheTrainingboss.SFADVDev.Mvc.Controllers
 {
@@ -34,7 +35,7 @@ namespace TheTrainingboss.SFADVDev.Mvc.Controllers
 											.Select(p => p.NavigationNode)
 											.Where(n => !n.IsBackend && !n.IsDeleted); ;
 			var model = new PageCrudModel(pages);
-			
+			EventHub.Raise(new RajaEvent { MyCustomMessage = "Lino says Hello" });
 			return View(model);
 		}
 
@@ -61,9 +62,8 @@ namespace TheTrainingboss.SFADVDev.Mvc.Controllers
 			var bag = new Dictionary<string, string>();
 			bag.Add("ContentType", typeof(PageNode).FullName);
 			WorkflowManager.MessageWorkflow(id, typeof(PageNode), null, "Publish", false, bag);
-
 			return View();
-        }
+		}
 
 		public ActionResult FluentPage()
         {
