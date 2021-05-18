@@ -11,6 +11,7 @@ using Telerik.Sitefinity.Personalization;
 using System;
 using Progress.Sitefinity.Renderer.Entities.Content;
 using Progress.Sitefinity.Renderer.Designers.Attributes;
+using Telerik.Sitefinity.Modules.Libraries;
 
 namespace TheTrainingboss.SFADVDev.Mvc.Controllers
 {
@@ -26,6 +27,10 @@ namespace TheTrainingboss.SFADVDev.Mvc.Controllers
 			model.Enum = this.Enum;
 			model.Number = this.Number;
 			model.MyDate = this.MyDate;
+			LibrariesManager lbmanager = LibrariesManager.GetManager();
+			var image = lbmanager.GetImage(Guid.Parse(this.Images.ItemIdsOrdered[0]));
+			model.Images = image.MediaUrl;
+
 			return View(model);
 		}
 
@@ -33,6 +38,7 @@ namespace TheTrainingboss.SFADVDev.Mvc.Controllers
 		{
 			var model = new MyWidgetModel();
 			model.Message = this.Message;
+			
 			return View(model);
 		}
 

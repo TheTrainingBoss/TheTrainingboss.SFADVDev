@@ -7,6 +7,8 @@
 using System;
 using System.Web.Mvc;
 using Telerik.Sitefinity.Mvc;
+using Telerik.Sitefinity.Libraries.Model;
+using Progress.Sitefinity.Renderer.Entities.Content;
 
 namespace TheTrainingboss.SFADVDev.Mvc.Models
 {
@@ -23,5 +25,6 @@ namespace TheTrainingboss.SFADVDev.Mvc.Models
 		public Enumeration Enum { get; set; }
 		public int Number { get; set; }
 		public DateTime MyDate { get; set; }
+		public string Images { get; set; }
 	}
 }
