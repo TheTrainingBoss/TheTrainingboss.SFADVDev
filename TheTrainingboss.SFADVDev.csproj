@@ -1171,7 +1171,11 @@
     <Compile Include="App_Start\RazorGeneratorMvcStart.cs" />
     <Compile Include="AzureWebRole.cs" />
     <Compile Include="Mvc\Controllers\MyWidgetController.cs" />
+    <Compile Include="Mvc\Controllers\NewsCrudController.cs" />
+    <Compile Include="Mvc\Controllers\PageCrudController.cs" />
     <Compile Include="Mvc\Models\MyWidgetModel.cs" />
+    <Compile Include="Mvc\Models\NewsCrudModel.cs" />
+    <Compile Include="Mvc\Models\PageCrudModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1203,7 +1207,11 @@
     <Content Include="App_Data\Sitefinity\Logs\Trace.log" />
     <Content Include="App_Data\Sitefinity\Logs\UpgradeTrace.log" />
     <Content Include="App_Data\Sitefinity\Sitefinity.lic" />
+    <Content Include="Mvc\Views\NewsCrud\Index.cshtml" />
     <None Include="Mvc\Views\News\List.LinoList.cshtml" />
+    <Content Include="Mvc\Views\PageCrud\Index.cshtml" />
+    <Content Include="Mvc\Views\PageCrud\CreatePage.cshtml" />
+    <Content Include="Mvc\Views\Shared\_lino.cshtml" />
     <None Include="packages.config" />
     <Content Include="SampleTemplate.cshtml">
       <Generator>RazorGenerator</Generator>
