@@ -12,9 +12,12 @@ using System;
 using Progress.Sitefinity.Renderer.Entities.Content;
 using Progress.Sitefinity.Renderer.Designers.Attributes;
 using Telerik.Sitefinity.Modules.Libraries;
+using Telerik.Sitefinity.Frontend.Mvc.Infrastructure.Controllers.Attributes;
+using TheTrainingboss.SFADVDev.Localization;
 
 namespace TheTrainingboss.SFADVDev.Mvc.Controllers
 {
+	[Localization(typeof(MyWidgetResources))]
 	[ControllerToolboxItem(Name = "MyWidget", Title = "My Widget", SectionName = "SFADVDev")]
 	public class MyWidgetController : Controller, IPersonalizable
 	{
@@ -47,6 +50,7 @@ namespace TheTrainingboss.SFADVDev.Mvc.Controllers
             this.ActionInvoker.InvokeAction(this.ControllerContext, "Index");
         }
 
+		
 		public string Message { get; set; }
 		public bool Flag { get; set; }
 		public Enumeration Enum { get; set; }
