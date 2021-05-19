@@ -1,0 +1,44 @@
+@using System.Web.Mvc;
+@using Telerik.Sitefinity.Frontend.Mvc.Helpers;
+@using Telerik.Sitefinity.Modules.Pages;
+@using Telerik.Sitefinity.UI.MVC;
+@using Telerik.Sitefinity.Services;
+
+@model TheTrainingboss.SFADVDev.Mvc.Models.SliderMVCModel
+
+
+<link rel="stylesheet" type="text/css" href="/Custom/Styles/css/Parallax/demo.css" />
+<link rel="stylesheet" type="text/css" href="/Custom/Styles/css/Parallax/style.css" />
+@Html.Script(ScriptRef.JQuery, "top")
+<script type="text/javascript" src="/Custom/Styles/js/Parallax/modernizr.custom.28468.js"></script>
+<script type="text/javascript" src="/Custom/Styles/js/Parallax/jquery.cslider.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Economica:700,400italic' rel='stylesheet' type='text/css'>
+<noscript>
+    <link rel="stylesheet" type="text/css" href="/Custom/Styles/js/Parallax/nojs.css" />
+</noscript>
+<div class="container">
+    <div id="da-slider" class="da-slider">
+
+        @foreach (var parallaxItem in Model.ParallaxItems)
+        {
+            <div class="da-slide">
+                <h2>@Html.Raw(parallaxItem.Title)</h2>
+                <p>@Html.Raw(parallaxItem.Details)</p>
+                <a href="@Html.Raw(parallaxItem.ItemUrl)" class="da-link">Read more</a>
+                <div class="da-img"><img src="@Html.Raw(parallaxItem.ImageUrl)" alt="@Html.Raw(parallaxItem.ImageAlt)" /></div>
+            </div>
+        }
+        <nav class="da-arrows">
+            <span class="da-arrows-prev"></span>
+            <span class="da-arrows-next"></span>
+        </nav>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+
+        $('#da-slider').cslider();
+
+    });
+</script>

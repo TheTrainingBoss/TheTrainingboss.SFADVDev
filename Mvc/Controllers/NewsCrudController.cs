@@ -20,6 +20,7 @@ using Telerik.Sitefinity.Model;
 using Telerik.Sitefinity.Taxonomies;
 using Telerik.Sitefinity.Taxonomies.Model;
 using Telerik.OpenAccess;
+using Telerik.Sitefinity.Configuration;
 
 namespace TheTrainingboss.SFADVDev.Mvc.Controllers
 {
@@ -31,7 +32,7 @@ namespace TheTrainingboss.SFADVDev.Mvc.Controllers
 		public ActionResult Index()
 		{
 			
-			var news = nm.GetNewsItems().Where(n => n.Status == ContentLifecycleStatus.Live);
+		    var news = nm.GetNewsItems().Where(n => n.Status == ContentLifecycleStatus.Live);
 			var model = new NewsCrudModel(news);		
 			return View(model);
 		}

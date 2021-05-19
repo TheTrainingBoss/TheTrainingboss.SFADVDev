@@ -1017,6 +1017,17 @@
       <DependentUpon>Sitefinity.mdf</DependentUpon>
     </Content>
     <Content Include="Css\Raja.css" />
+    <Content Include="Custom\Styles\css\Parallax\demo.css" />
+    <Content Include="Custom\Styles\css\Parallax\fonts\BebasNeue-webfont.svg" />
+    <Content Include="Custom\Styles\css\Parallax\fonts\Dharma Type Font License.txt" />
+    <Content Include="Custom\Styles\css\Parallax\nojs.css" />
+    <Content Include="Custom\Styles\css\Parallax\style.css" />
+    <Content Include="Custom\Styles\css\Parallax\style2.css" />
+    <Content Include="Custom\Styles\img\Parallax\arrows.png" />
+    <Content Include="Custom\Styles\img\Parallax\bg.png" />
+    <Content Include="Custom\Styles\img\Parallax\waves.gif" />
+    <Content Include="Custom\Styles\js\Parallax\jquery.cslider.js" />
+    <Content Include="Custom\Styles\js\Parallax\modernizr.custom.28468.js" />
     <Content Include="Default.aspx" />
     <Content Include="extensions.bundle.js" />
     <Content Include="Global.asax" />
@@ -1180,12 +1191,16 @@
     <Compile Include="Mvc\Controllers\MyWidgetController.cs" />
     <Compile Include="Mvc\Controllers\NewsCrudController.cs" />
     <Compile Include="Mvc\Controllers\PageCrudController.cs" />
+    <Compile Include="Mvc\Controllers\SliderMVCController.cs" />
     <Compile Include="Mvc\Models\IRajaEvent.cs" />
     <Compile Include="Mvc\Models\MyWidgetModel.cs" />
     <Compile Include="Mvc\Models\NewsCrudModel.cs" />
     <Compile Include="Mvc\Models\PageCrudModel.cs" />
     <Compile Include="Mvc\Models\RajaEvent.cs" />
+    <Compile Include="Mvc\Models\SliderMVCModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\CustomMembershipProvider.cs" />
+    <Compile Include="Providers\CustomNewsProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AdminApp\elements.c5e2c5d33daddde80c33.bundle.js.map" />
@@ -1219,11 +1234,15 @@
     <Content Include="Mvc\Views\NewsCrud\Index.cshtml" />
     <Content Include="Mvc\Views\NewsCrud\CreatePressRelease.cshtml" />
     <Content Include="Mvc\Views\NewsCrud\Update.cshtml" />
+    <Content Include="Custom\Styles\css\Parallax\fonts\BebasNeue-webfont.eot" />
+    <Content Include="Custom\Styles\css\Parallax\fonts\BebasNeue-webfont.ttf" />
+    <Content Include="Custom\Styles\css\Parallax\fonts\BebasNeue-webfont.woff" />
     <None Include="Mvc\Views\News\List.LinoList.cshtml" />
     <Content Include="Mvc\Views\PageCrud\Index.cshtml" />
     <Content Include="Mvc\Views\PageCrud\CreatePage.cshtml" />
     <Content Include="Mvc\Views\Shared\_lino.cshtml" />
     <Content Include="Mvc\Views\PageCrud\FluentPage.cshtml" />
+    <Content Include="Mvc\Views\SliderMVC\Index.cshtml" />
     <None Include="packages.config" />
     <Content Include="SampleTemplate.cshtml">
       <Generator>RazorGenerator</Generator>
